@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Labeling</title>
+    <style>
+        .canvas-container {
+            position: relative;
+            width: 800px; /* Set the container width */
+            height: 600px; /* Set the container height */
+            overflow: auto; /* Enable scrolling */
+        }
+        canvas {
+            border: 1px solid #000;
+            max-width: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Label the image</h1>
+    <input type="file" id="imageInput" accept=".jpg, .jpeg, .png, .gif, .pdf">
+    <div class="canvas-container">
+        <canvas id="imageCanvas"></canvas>
+    </div>
+    <button id="drawRectButton">Draw Rectangle</button>
+    <button id="deleteRectButton">Delete Selected</button>
+    <button id="clearCanvasButton">Clear Canvas</button>
+    <button id="exportLabelsButton">Export Labels</button>
+    <button id="validateButton">Validate Labels</button>
+    <div id="selectedRectInfo">
+        <h2>Rect Info:</h2>
+        <label for="rect_name">Name:</label>
+        <input type="string" id="rect_name"><br>
+        <label for="xInput">X:</label>
+        <input type="number" id="xInput"><br>
+        <label for="yInput">Y:</label>
+        <input type="number" id="yInput"><br>
+        <label for="widthInput">Width:</label>
+        <input type="number" id="widthInput"><br>
+        <label for="heightInput">Height:</label>
+        <input type="number" id="heightInput"><br>
+        <label for="expected_resultInput">Expected word:</label>
+        <input type="string" id="expected_resultInput"><br>
+        <button id="update_rect">update</button>
+        
+    </div>
+    <script src = "static/js/main2.js"> </script>t
+</body>
+</html
