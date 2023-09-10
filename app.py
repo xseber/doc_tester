@@ -50,10 +50,10 @@ async def upload_file():
 @app.route('/convert', methods=['POST'])
 async def convert_pdf_to_png():
     files = await request.files
-    pdf_file = files['file']
+    file = files['file']
 
-    if pdf_file:
-        pdf_data = pdf_file.read()
+    if '.pdf' in file.filename:
+        pdf_data = file.read()
 
             # Convert the PDF to PNG
         images = convert_from_bytes(pdf_data)
@@ -62,7 +62,7 @@ async def convert_pdf_to_png():
         png_data = io.BytesIO()
         images[0].save(png_data, format='PNG')
         png_data.seek(0)
-        filename = pdf_file.filename.replace('.pdf', '.png')
+        filename = file.filename.replace('.pdf', '.png')
         filename2 = os.path.join(app.config['UPLOAD_FOLDER'], filename)
         with open(filename2, 'wb') as png_file:
             png_file.write(png_data.read())
@@ -70,6 +70,10 @@ async def convert_pdf_to_png():
         # png_base64 = base64.b64encode(png_data.read()).decode('utf-8-sig')
         return await  send_from_directory(app.config['UPLOAD_FOLDER'], filename)
         # return jsonify({'success': 'Image uploaded successfully','image_data':'data:image/png;base64,'+png_base64})
+    else :
+        filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        await file.save(filename)
+        return await send_from_directory(app.config['UPLOAD_FOLDER'], file.filename)
     return jsonify({'message': 'Invalid PDF file'})
 
 @app.route('/validate', methods =['POST'])
